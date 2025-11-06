@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Beaming Methods</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base styles and variables */
+        :root {
+            --primary: #8a2be2;
+            --secondary: #4b0082;
+            --accent: #9370db;
+            --dark: #0a0a0a;
+            --darker: #050505;
+            --light: #e6e6fa;
+            --neon: #00ffff;
+            --neon-pink: #ff00ff;
+            --shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 50%, #1a0a2b 100%);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Background animation */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            opacity: 0.1;
+            filter: blur(40px);
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .floating-shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .floating-shape:nth-child(2) {
+            width: 400px;
+            height: 400px;
+            top: 60%;
+            left: 80%;
+            animation-delay: 5s;
+        }
+
+        .floating-shape:nth-child(3) {
+            width: 250px;
+            height: 250px;
+            top: 80%;
+            left: 20%;
+            animation-delay: 10s;
+        }
+
+        /* Page container */
+        .page-container {
+            display: none;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .page-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* Header and Navigation */
+        header {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(138, 43, 226, 0.3);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-shadow: 0 0 10px var(--neon);
+            cursor: pointer;
+        }
+
+        .logo i {
+            color: var(--neon);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--light);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--neon);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon);
+            transition: var(--transition);
+            box-shadow: 0 0 8px var(--neon);
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--light);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--neon), var(--neon-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: #ccc;
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 0.8rem 2.5rem;
+            background: rgba(138, 43, 226, 0.2);
+            color: var(--light);
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 1px solid var(--primary);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 1s ease 0.7s both;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            cursor: pointer;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+
+        .cta-button:hover {
+            background: rgba(138, 43, 226, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.5);
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 4rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            color: var(--neon);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 15px var(--neon);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--neon);
+            box-shadow: 0 0 10px var(--neon);
+        }
+
+        .section-title p {
+            color: #aaa;
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* Methods Grid */
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .method-card {
+            background: rgba(20, 20, 30, 0.6);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .method-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--neon), var(--neon-pink));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .method-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .method-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(138, 43, 226, 0.4);
+        }
+
+        .method-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .method-header {
+            padding: 1.5rem;
+            background: rgba(30, 30, 40, 0.7);
+            border-bottom: 1px solid rgba(138, 43, 226, 0.3);
+        }
+
+        .method-header h3 {
+            color: var(--neon);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .method-header h3 i {
+            color: var(--neon-pink);
+        }
+
+        .method-content {
+            padding: 1.5rem;
+        }
+
+        .method-content p {
+            color: #ccc;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .method-steps {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+
+        .method-steps li {
+            margin-bottom: 1rem;
+            padding-left: 2.5rem;
+            position: relative;
+            color: #ddd;
+        }
+
+        .method-steps li::before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 25px;
+            height: 25px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        /* About Page */
+        .about-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--neon);
+            text-shadow: 0 0 10px var(--neon);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: #ccc;
+            line-height: 1.7;
+        }
+
+        .about-features {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .about-features li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #ddd;
+        }
+
+        .about-features i {
+            color: var(--neon);
+            font-size: 1.2rem;
+        }
+
+        .about-image {
+            text-align: center;
+            position: relative;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(5, 5, 5, 0.9);
+            padding: 3rem 5% 1.5rem;
+            border-top: 1px solid rgba(138, 43, 226, 0.3);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            color: var(--neon);
+            text-shadow: 0 0 10px var(--neon);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .footer-links a:hover {
+            color: var(--neon);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--light);
+            transition: var(--transition);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px var(--neon), 0 0 20px var(--neon);
+            }
+            to {
+                text-shadow: 0 0 20px var(--neon), 0 0 30px var(--neon), 0 0 40px var(--neon);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.95);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: var(--shadow);
+                backdrop-filter: blur(15px);
+                border-top: 1px solid rgba(138, 43, 226, 0.3);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+
+            .methods-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="bg-animation">
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="logo" onclick="showPage('home')">
+                <i class="fas fa-bolt"></i>
+                <span>BeamMethods By Tokun ID</span>
+            </div>
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <a class="active" onclick="showPage('home')">Home</a>
+                <a onclick="showPage('social')">Social Methods</a>
+                <a onclick="showPage('advanced')">Advanced Methods</a>
+                <a onclick="showPage('about')">About</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Home Page -->
+    <div id="home" class="page-container active">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Advanced Beaming Methods</h1>
+                <p>Discover the most effective techniques for successful beaming operations across various platforms</p>
+                <div class="cta-buttons">
+                    <button class="cta-button" onclick="showPage('social')">Explore Social Methods</button>
+                    <button class="cta-button" onclick="showPage('advanced')" style="margin-left: 1rem;">View Advanced Methods</button>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-title">
+                <h2>Why Our Methods Work</h2>
+                <p>Proven techniques with high success rates across multiple platforms</p>
+            </div>
+            <div class="methods-grid">
+                <div class="method-card animate">
+                    <div class="method-header">
+                        <h3><i class="fas fa-chart-line"></i> High Success Rate</h3>
+                    </div>
+                    <div class="method-content">
+                        <p>Our methods have been tested and refined to achieve maximum effectiveness with minimal effort.</p>
+                    </div>
+                </div>
+                <div class="method-card animate">
+                    <div class="method-header">
+                        <h3><i class="fas fa-users"></i> Platform Diversity</h3>
+                    </div>
+                    <div class="method-content">
+                        <p>Techniques tailored for Facebook, Discord, TikTok, Roblox, YouTube and more.</p>
+                    </div>
+                </div>
+                <div class="method-card animate">
+                    <div class="method-header">
+                        <h3><i class="fas fa-shield-alt"></i> Stealth Operations</h3>
+                    </div>
+                    <div class="method-content">
+                        <p>Methods designed to maintain operational security while achieving objectives.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Social Methods Page -->
+    <div id="social" class="page-container">
+        <section>
+            <div class="section-title">
+                <h2>Social Methods</h2>
+                <p>Effective beaming techniques using popular social media platforms</p>
+            </div>
+            
+            <div class="methods-grid">
+                <div class="method-card">
+                    <div class="method-header">
+                        <h3><i class="fab fa-facebook"></i> Facebook Method</h3>
+                    </div>
+                    <div class="method-content">
+                        <p>Join FACEBOOK group chats and find targets to beam there</p>
+                        <ol class="method-steps">
+                            <li>Find relevant Facebook groups matching your target audience</li>
+                            <li>Join group chats and participate in conversations</li>
+                            <li>Identify potential targets based on activity and engagement</li>
+                            <li>Execute the beaming operation using appropriate strategies</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <div class="method-header">
+                        <h3><i class="fab fa-discord"></i> Discord Method</h3>
+                    </div>
+                    <div class="method-content">
+                        <p>Beam in discord servers using private server links as bait</p>
+                        <ol class="method-steps">
+                            <li>Identify active Discord servers with high user engagement</li>
+                            <li>Create a private server designed to attract targets</li>
+                            <li>Distribute the server link across multiple channels</li>
+                            <li>Execute beaming operations when targets join</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <div class="method-header">
+                        <h3><i class="fas fa-gamepad"></i> Roblox Method</h3>
+                    </div>
+                    <div class="method-content">
+                        <p>Find targets in Roblox games and befriend them to initiate beaming</p>
+                        <ol class="method-steps">
+                            <li>Play popular Roblox games with high player counts</li>
+                            <li>Build friendships with other players through in-game interactions</li>
+                            <li>Encourage them to download Discord for "better communication"</li>
+                            <li>Execute beaming once connection is established</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <div class="method-header">
+                        <h3><i class="fab fa-tiktok"></i> TikTok Method</h3>
+                    </div>
+                    <div class="method-content">
+                        <p>Use fake links in your TikTok/YouTube bio with engagement tactics</p>
+                        <ol class="method-steps">
+                            <li>Create engaging TikTok content to build a follower base</li>
+                            <li>Place deceptive links in your profile bio</li>
+                            <li>Respond to comments with "join me in my bio" messages</li>
+                            <li>Execute beaming when targets interact with the links</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <div class="method-header">
+                        <h3><i class="fas fa-broadcast-tower"></i> TikTok Live Method</h3>
+                    </div>
+                    <div class="method-content">
+                        <p>Advanced method requiring 1k+ followers for repeated live sessions</p>
+                        <ol class="method-steps">
+                            <li>Build a TikTok account with 1,000+ followers</li>
+                            <li>Conduct regular live streaming sessions</li>
+                            <li>Promote deceptive links in your bio during live streams</li>
+                            <li>Leverage viewer interaction to maximize beaming opportunities</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <div class="method-header">
+                        <h3><i class="fas fa-crown"></i> Fake Owner Method</h3>
+                    </div>
+                    <div class="method-content">
+                        <p>Impersonate server owners/mods in giveaway servers with fake prize links</p>
+                        <ol class="method-steps">
+                            <li>Join popular Discord giveaway servers</li>
+                            <li>Impersonate server owners or moderators</li>
+                            <li>Send DMs to members with fake group links</li>
+                            <li>Claim they've won prizes to encourage link interaction</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Advanced Methods Page -->
+    <div id="advanced" class="page-container">
+        <section>
+            <div class="section-title">
+                <h2>Advanced Methods</h2>
+                <p>High-success rate beaming techniques with proven results</p>
+            </div>
+            
+            <div class="methods-grid">
+                <div class="method-card">
+                    <div class="method-header">
+                        <h3><i class="fas fa-video"></i> Fake TikTok Live</h3>
+                    </div>
+                    <div class="method-content">
+                        <p>Stream gameplay on TikTok Live while directing viewers to deceptive links</p>
+                        <ol class="method-steps">
+                            <li>Prepare a TikTok account with live streaming capability</li>
+                            <li>Stream popular games while interacting with viewers</li>
+                            <li>Direct viewers to join through links in your bio</li>
+                            <li>Use pre-recorded fake giveaway content if necessary</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <div class="method-header">
+                        <h3><i class="fas fa-exchange-alt"></i> Fake Trading Method</h3>
+                    </div>
+                    <div class="method-content">
+                        <p>Create appealing fake trades to lure targets into DMs</p>
+                        <ol class="method-steps">
+                            <li>Post attractive but fake trade offers in relevant communities</li>
+                            <li>Wait for interested targets to respond</li>
+                            <li>Request they DM you for trade details</li>
+                            <li>Send deceptive links once they initiate contact</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <div class="method-header">
+                        <h3><i class="fas fa-building"></i> Roblox Condo Method</h3>
+                    </div>
+                    <div class="method-content">
+                        <p>Leverage interest in Roblox condo games for beaming operations</p>
+                        <ol class="method-steps">
+                            <li>Create a dedicated Discord server for operations</li>
+                            <li>Share fake game links within the server</li>
+                            <li>Find and reupload TikTok videos about condo games</li>
+                            <li>Capitalize on the curiosity around condo content</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <div class="method-header">
+                        <h3><i class="fas fa-seedling"></i> Live Gameplay Method</h3>
+                    </div>
+                    <div class="method-content">
+                        <p>Incorporate beaming into live gameplay sessions with fake private servers</p>
+                        <ol class="method-steps">
+                            <li>Stream popular games like "Grow a Garden" on live platforms</li>
+                            <li>During streams, mention your "private server"</li>
+                            <li>Direct viewers to links in your bio to join</li>
+                            <li>Promise exclusive pets or items to increase engagement</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <div class="method-header">
+                        <h3><i class="fab fa-youtube"></i> YouTube Free Pets Method</h3>
+                    </div>
+                    <div class="method-content">
+                        <p>Use YouTube Shorts with compelling stories to drive traffic to deceptive links</p>
+                        <ol class="method-steps">
+                            <li>Create engaging YouTube Shorts with emotional stories</li>
+                            <li>Offer "free pets" or items within the story narrative</li>
+                            <li>Direct viewers to add you through links in your bio</li>
+                            <li>Capitalize on the desire for free digital items</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <div class="method-header">
+                        <h3><i class="fas fa-gift"></i> Free Giftcard Method</h3>
+                    </div>
+                    <div class="method-content">
+                        <p>Leverage the appeal of free giftcards to attract targets</p>
+                        <ol class="method-steps">
+                            <li>Create content promoting "free giftcards"</li>
+                            <li>Offer substantial giftcard values to increase appeal</li>
+                            <li>Direct interested users to links in your bio</li>
+                            <li>Execute beaming operations through the provided links</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- About Page -->
+    <div id="about" class="page-container">
+        <section>
+            <div class="section-title">
+                <h2>About Us</h2>
+                <p>Learn more about our mission and methodology</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Advanced Beaming Methodology</h2>
+                    <p>We specialize in developing and refining advanced beaming techniques for various digital platforms. Our methods are the result of extensive research and testing in real-world scenarios.</p>
+                    <p>Each technique has been optimized for maximum effectiveness while maintaining operational security and minimizing detection risks.</p>
+                    
+                    <ul class="about-features">
+                        <li><i class="fas fa-check-circle"></i> Proven success across multiple platforms</li>
+                        <li><i class="fas fa-check-circle"></i> Regularly updated methods</li>
+                        <li><i class="fas fa-check-circle"></i> Detailed step-by-step instructions</li>
+                        <li><i class="fas fa-check-circle"></i> Focus on operational security</li>
+                        <li><i class="fas fa-check-circle"></i> Adaptive techniques for changing platforms</li>
+                    </ul>
+                </div>
+                
+                <div class="about-image">
+                    <!-- Placeholder for an image -->
+                    <div style="width: 100%; height: 300px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-lock" style="font-size: 5rem; color: white;"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>BeamMethods</h3>
+                <p>Advanced techniques and methodologies for modern beaming operations across digital platforms.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a onclick="showPage('home')"><i class="fas fa-arrow-right"></i> Home</a></li>
+                    <li><a onclick="showPage('social')"><i class="fas fa-arrow-right"></i> Social Methods</a></li>
+                    <li><a onclick="showPage('advanced')"><i class="fas fa-arrow-right"></i> Advanced Methods</a></li>
+                    <li><a onclick="showPage('about')"><i class="fas fa-arrow-right"></i> About</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                    <li><a href="#"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                    <li><a href="#"><i class="fas fa-exclamation-triangle"></i> Disclaimer</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 BeamMethods. All rights reserved. | For educational and research purposes only</p>
+        </div>
+    </footer>
+
+    <script>
+        // Page navigation system
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-container').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Find and activate the corresponding nav link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                if (link.textContent.toLowerCase().includes(pageId) || 
+                   (pageId === 'home' && link.textContent === 'Home')) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Close mobile menu if open
+            if (window.innerWidth <= 768) {
+                document.getElementById('navLinks').classList.remove('active');
+            }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+            
+            // Animate method cards on page load
+            if (pageId === 'social' || pageId === 'advanced') {
+                setTimeout(animateMethodCards, 300);
+            }
+        }
+
+        // Animate method cards when they come into view
+        function animateMethodCards() {
+            const methodCards = document.querySelectorAll('.method-card');
+            
+            methodCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('animate');
+                }, index * 150);
+            });
+        }
+
+        // Initialize the website
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+            
+            // Animate home page cards
+            animateMethodCards();
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (window.innerWidth <= 768 && 
+                    !event.target.closest('.navbar') && 
+                    navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
