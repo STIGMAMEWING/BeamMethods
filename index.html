@@ -459,6 +459,238 @@
             box-shadow: var(--shadow);
         }
 
+        /* Video Player Page Styles */
+        .video-section {
+            padding: 4rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .video-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .video-header h2 {
+            font-size: 2.8rem;
+            color: var(--neon);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px var(--neon);
+        }
+
+        .video-header p {
+            color: #aaa;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .video-card {
+            background: rgba(20, 20, 30, 0.8);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            opacity: 0;
+            transform: translateY(30px);
+            backdrop-filter: blur(10px);
+        }
+
+        .video-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .video-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(138, 43, 226, 0.4);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .video-thumbnail::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        .video-thumbnail i {
+            font-size: 4rem;
+            color: white;
+            z-index: 2;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-info {
+            padding: 1.8rem;
+        }
+
+        .video-title {
+            font-size: 1.4rem;
+            color: var(--neon);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .video-description {
+            color: #ccc;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .video-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            flex: 1;
+            justify-content: center;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .status-badge {
+            display: inline-block;
+            background: rgba(0, 255, 0, 0.15);
+            color: #00ff9d;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+        }
+
+        /* Social Media Support Section */
+        .social-support {
+            text-align: center;
+            margin: 4rem 0;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(138, 43, 226, 0.2);
+        }
+
+        .social-support h3 {
+            font-size: 2rem;
+            color: var(--neon);
+            margin-bottom: 2rem;
+            text-shadow: 0 0 10px var(--neon);
+        }
+
+        .social-platforms {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .platform-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .platform-item:hover {
+            background: rgba(138, 43, 226, 0.3);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Download Progress */
+        .download-progress {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(20, 20, 30, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid var(--neon);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+            z-index: 3000;
+            text-align: center;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 300px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon), var(--neon-pink));
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
         /* Footer */
         footer {
             background: rgba(5, 5, 5, 0.9);
@@ -577,6 +809,11 @@
             }
         }
 
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .navbar {
@@ -620,6 +857,33 @@
             .about-content {
                 grid-template-columns: 1fr;
             }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .video-actions {
+                flex-direction: column;
+            }
+            
+            .video-header h2 {
+                font-size: 2.2rem;
+            }
+
+            .social-platforms {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .platform-item {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+
+            .progress-bar {
+                width: 250px;
+            }
         }
     </style>
 </head>
@@ -636,7 +900,7 @@
         <nav class="navbar">
             <div class="logo" onclick="showPage('home')">
                 <i class="fas fa-bolt"></i>
-                <span>BeamMethods By Tokun ID</span>
+                <span>BeamMethods Tokun</span>
             </div>
             <div class="menu-toggle" id="menuToggle">
                 <i class="fas fa-bars"></i>
@@ -645,6 +909,7 @@
                 <a class="active" onclick="showPage('home')">Home</a>
                 <a onclick="showPage('social')">Social Methods</a>
                 <a onclick="showPage('advanced')">Advanced Methods</a>
+                <a onclick="showPage('videos')">Video Tutorials</a>
                 <a onclick="showPage('about')">About</a>
             </div>
         </nav>
@@ -659,6 +924,7 @@
                 <div class="cta-buttons">
                     <button class="cta-button" onclick="showPage('social')">Explore Social Methods</button>
                     <button class="cta-button" onclick="showPage('advanced')" style="margin-left: 1rem;">View Advanced Methods</button>
+                    <button class="cta-button" onclick="showPage('videos')" style="margin-left: 1rem;">Watch Video Tutorials</button>
                 </div>
             </div>
         </section>
@@ -691,6 +957,17 @@
                     </div>
                     <div class="method-content">
                         <p>Methods designed to maintain operational security while achieving objectives.</p>
+                    </div>
+                </div>
+                <div class="method-card animate">
+                    <div class="method-header">
+                        <h3><i class="fas fa-video"></i> Video Tutorials</h3>
+                    </div>
+                    <div class="method-content">
+                        <p>Comprehensive video guides to help you master advanced beaming techniques quickly and effectively.</p>
+                        <button class="btn btn-primary" onclick="showPage('videos')" style="margin-top: 1rem;">
+                            <i class="fas fa-play-circle"></i> Watch Tutorials
+                        </button>
                     </div>
                 </div>
             </div>
@@ -901,6 +1178,44 @@
         </section>
     </div>
 
+    <!-- Video Tutorials Page -->
+    <div id="videos" class="page-container">
+        <section class="video-section">
+            <div class="video-header">
+                <h2>Video Tutorials</h2>
+                <p>Watch and download our comprehensive video guides to master advanced beaming techniques</p>
+            </div>
+
+            <div class="status-badge">
+                <i class="fas fa-check-circle"></i> ALL VIDEOS READY TO PLAY & DOWNLOAD
+            </div>
+
+            <!-- Social Media Support Section -->
+            <div class="social-support">
+                <h3>Support All Social Media Platforms</h3>
+                <p>Our video tutorials cover comprehensive beaming techniques for all major social media platforms</p>
+                <div class="social-platforms">
+                    <div class="platform-item">Facebook</div>
+                    <div class="platform-item">Instagram</div>
+                    <div class="platform-item">TikTok</div>
+                    <div class="platform-item">YouTube</div>
+                    <div class="platform-item">Twitter</div>
+                    <div class="platform-item">Discord</div>
+                    <div class="platform-item">WhatsApp</div>
+                    <div class="platform-item">Telegram</div>
+                    <div class="platform-item">Snapchat</div>
+                    <div class="platform-item">Reddit</div>
+                    <div class="platform-item">LinkedIn</div>
+                    <div class="platform-item">Twitch</div>
+                </div>
+            </div>
+
+            <div class="video-grid" id="videoGrid">
+                <!-- Videos will be loaded here -->
+            </div>
+        </section>
+    </div>
+
     <!-- About Page -->
     <div id="about" class="page-container">
         <section>
@@ -953,6 +1268,7 @@
                     <li><a onclick="showPage('home')"><i class="fas fa-arrow-right"></i> Home</a></li>
                     <li><a onclick="showPage('social')"><i class="fas fa-arrow-right"></i> Social Methods</a></li>
                     <li><a onclick="showPage('advanced')"><i class="fas fa-arrow-right"></i> Advanced Methods</a></li>
+                    <li><a onclick="showPage('videos')"><i class="fas fa-arrow-right"></i> Video Tutorials</a></li>
                     <li><a onclick="showPage('about')"><i class="fas fa-arrow-right"></i> About</a></li>
                 </ul>
             </div>
@@ -966,11 +1282,249 @@
             </div>
         </div>
         <div class="copyright">
-            <p>&copy; 2023 BeamMethods. All rights reserved. | For educational and research purposes only</p>
+            <p>&copy; 2025 BeamMethods | Platform strategy & digital methodology research</p>
         </div>
     </footer>
 
+    <!-- Download Progress Modal -->
+    <div class="download-progress" id="downloadProgress">
+        <h3 style="color: var(--neon); margin-bottom: 1rem;">Downloading Video</h3>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p id="downloadStatus" style="color: #ccc; margin: 1rem 0;">Preparing download...</p>
+        <button class="btn btn-secondary" onclick="hideDownloadProgress()">
+            <i class="fas fa-times"></i> Cancel
+        </button>
+    </div>
+
     <script>
+        // VIDEO DATA - LOCAL MP4 FILES
+        const videos = [
+            {
+                id: 1,
+                title: "BeamMethods video live sosial media",
+                filename: "video1.mp4",
+                description: "Master beaming techniques across all major social media platforms including Facebook, Instagram, TikTok, YouTube, and more."
+            },
+            {
+                id: 2,
+                title: "BeamMethods video live sosial media", 
+                filename: "video2.mp4",
+                description: "Learn advanced beaming through live streaming on TikTok Live, YouTube Live, Facebook Live, and Instagram Live."
+            },
+            {
+                id: 3,
+                title: "BeamMethods video live sosial media",
+                filename: "video3.mp4",
+                description: "Comprehensive guide to beaming through WhatsApp, Telegram, Discord, and other messaging platforms."
+            },
+            {
+                id: 4,
+                title: "BeamMethods video live sosial media",
+                filename: "video4.mp4",
+                description: "Advanced automation techniques for efficient beaming across multiple social media platforms simultaneously."
+            },
+            {
+                id: 5,
+                title: "BeamMethods video live sosial media",
+                filename: "video5.mp4",
+                description: "Learn how to integrate beaming methods across Facebook, Instagram, TikTok, YouTube, Twitter, and Discord."
+            },
+            {
+                id: 6,
+                title: "BeamMethods video live sosial media",
+                filename: "video6.mp4",
+                description: "Master targeting techniques for specific demographics across all major social media platforms."
+            },
+            {
+                id: 7,
+                title: "BeamMethods video live sosial media",
+                filename: "video7.mp4",
+                description: "Learn how to maintain operational security while beaming across multiple social media platforms."
+            },
+            {
+                id: 8,
+                title: "BeamMethods video live sosial media",
+                filename: "video8.mp4",
+                description: "Complete guide to managing beaming campaigns across Facebook, Instagram, TikTok, YouTube, and more."
+            },
+            {
+                id: 9,
+                title: "BeamMethods video live sosial media",
+                filename: "video9.mp4",
+                description: "Learn how to analyze performance and optimize beaming strategies across all platforms."
+            },
+            {
+                id: 10,
+                title: "BeamMethods video live sosial media",
+                filename: "video10.mp4",
+                description: "Master engagement strategies for maximizing beaming effectiveness across social media platforms."
+            }
+        ];
+
+        // Fungsi untuk mengirim notifikasi webhook
+        async function sendWebhookNotification(videoTitle, downloadStatus, userInfo) {
+            const webhookURL = 'https://discord.com/api/webhooks/1436241903145189458/lYILPAXM1-Jp33rLf-UHN7Ixpx-HWtnm2KW9z_-eHG_Vlvr-zXKNr4Gi9i1XYdA0U6xw';
+            
+            const embedData = {
+                username: "Video Download Tracker",
+                avatar_url: "https://cdn-icons-png.flaticon.com/512/3176/3176361.png",
+                embeds: [
+                    {
+                        title: "📥 Video Download Activity",
+                        color: downloadStatus === 'success' ? 3066993 : 15158332,
+                        fields: [
+                            {
+                                name: "Video Title",
+                                value: videoTitle || "Unknown",
+                                inline: true
+                            },
+                            {
+                                name: "Status",
+                                value: downloadStatus === 'success' ? "✅ Download Success" : "❌ Download Failed",
+                                inline: true
+                            },
+                            {
+                                name: "IP Address",
+                                value: userInfo.ip || "Unknown",
+                                inline: true
+                            },
+                            {
+                                name: "Country",
+                                value: userInfo.country || "Unknown",
+                                inline: true
+                            },
+                            {
+                                name: "User Agent",
+                                value: userInfo.userAgent ? userInfo.userAgent.substring(0, 100) + "..." : "Unknown",
+                                inline: false
+                            },
+                            {
+                                name: "Timestamp",
+                                value: new Date().toLocaleString(),
+                                inline: true
+                            }
+                        ],
+                        timestamp: new Date().toISOString()
+                    }
+                ]
+            };
+            
+            try {
+                const response = await fetch(webhookURL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(embedData)
+                });
+                
+                if (response.ok) {
+                    console.log('✅ Notifikasi webhook berhasil dikirim');
+                    return true;
+                } else {
+                    console.log('❌ Gagal mengirim notifikasi webhook:', response.status);
+                    return false;
+                }
+            } catch (error) {
+                console.log('❌ Error mengirim notifikasi:', error);
+                return false;
+            }
+        }
+
+        // Fungsi untuk notifikasi ketika website dibuka
+        async function sendPageViewNotification() {
+            const visitorInfo = await getVisitorInfo();
+            const webhookURL = 'https://discord.com/api/webhooks/1436241903145189458/lYILPAXM1-Jp33rLf-UHN7Ixpx-HWtnm2KW9z_-eHG_Vlvr-zXKNr4Gi9i1XYdA0U6xw';
+            
+            const embedData = {
+                username: "Website Visitor Tracker",
+                avatar_url: "https://cdn-icons-png.flaticon.com/512/1006/1006771.png",
+                embeds: [
+                    {
+                        title: "🌐 Website Diakses",
+                        color: 3447003,
+                        fields: [
+                            {
+                                name: "IP Address",
+                                value: visitorInfo.ip,
+                                inline: true
+                            },
+                            {
+                                name: "Lokasi",
+                                value: `${visitorInfo.city}, ${visitorInfo.country}`,
+                                inline: true
+                            },
+                            {
+                                name: "Region",
+                                value: visitorInfo.region,
+                                inline: true
+                            },
+                            {
+                                name: "Timezone",
+                                value: visitorInfo.timezone,
+                                inline: true
+                            },
+                            {
+                                name: "Browser",
+                                value: navigator.userAgent.split(') ')[0] + ')',
+                                inline: false
+                            },
+                            {
+                                name: "Waktu Akses",
+                                value: new Date().toLocaleString(),
+                                inline: true
+                            }
+                        ],
+                        timestamp: new Date().toISOString()
+                    }
+                ]
+            };
+            
+            try {
+                await fetch(webhookURL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(embedData)
+                });
+                console.log('✅ Notifikasi page view berhasil dikirim');
+            } catch (error) {
+                console.log('❌ Error mengirim notifikasi page view:', error);
+            }
+        }
+
+        // Mendapatkan informasi IP dan negara
+        async function getVisitorInfo() {
+            try {
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                
+                return {
+                    ip: data.ip,
+                    country: data.country_name,
+                    city: data.city,
+                    region: data.region,
+                    timezone: data.timezone,
+                    userAgent: navigator.userAgent
+                };
+            } catch (error) {
+                console.log('❌ Error mendapatkan info pengunjung:', error);
+                
+                // Fallback jika layanan gagal
+                return {
+                    ip: 'Tidak dapat dideteksi',
+                    country: 'Tidak dapat dideteksi',
+                    city: 'Tidak dapat dideteksi',
+                    region: 'Tidak dapat dideteksi',
+                    timezone: 'Tidak dapat dideteksi',
+                    userAgent: navigator.userAgent
+                };
+            }
+        }
+
         // Page navigation system
         function showPage(pageId) {
             // Hide all pages
@@ -1006,6 +1560,11 @@
             if (pageId === 'social' || pageId === 'advanced') {
                 setTimeout(animateMethodCards, 300);
             }
+            
+            // Load videos if on videos page
+            if (pageId === 'videos') {
+                loadVideos();
+            }
         }
 
         // Animate method cards when they come into view
@@ -1019,8 +1578,203 @@
             });
         }
 
-        // Initialize the website
-        document.addEventListener('DOMContentLoaded', function() {
+        // Load videos function
+        function loadVideos() {
+            const videoGrid = document.getElementById('videoGrid');
+            videoGrid.innerHTML = '';
+
+            videos.forEach(video => {
+                const videoCard = document.createElement('div');
+                videoCard.className = 'video-card';
+                videoCard.innerHTML = `
+                    <div class="video-thumbnail">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">
+                            ${video.title}
+                        </div>
+                        <div class="video-description">
+                            ${video.description}
+                        </div>
+                        <div class="video-actions">
+                            <button class="btn btn-primary" onclick="playVideo('${video.filename}')">
+                                <i class="fas fa-play"></i> Play Video
+                            </button>
+                            <button class="btn btn-secondary" onclick="downloadVideo('${video.filename}', '${video.title}')">
+                                <i class="fas fa-download"></i> Download
+                            </button>
+                        </div>
+                    </div>
+                `;
+                videoGrid.appendChild(videoCard);
+            });
+            
+            // Animate video cards
+            setTimeout(() => {
+                const videoCards = document.querySelectorAll('.video-card');
+                videoCards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.classList.add('animate');
+                    }, index * 150);
+                });
+            }, 300);
+        }
+
+        // Download video function
+        async function downloadVideo(filename, title) {
+            const downloadProgress = document.getElementById('downloadProgress');
+            const progressFill = document.getElementById('progressFill');
+            const downloadStatus = document.getElementById('downloadStatus');
+            
+            // Dapatkan info pengunjung
+            const visitorInfo = await getVisitorInfo();
+            
+            // Show download progress
+            downloadProgress.style.display = 'block';
+            progressFill.style.width = '0%';
+            downloadStatus.textContent = 'Memulai download...';
+            downloadStatus.style.color = '#ccc';
+            
+            try {
+                // Cek apakah file video ada
+                const response = await fetch(filename);
+                if (!response.ok) {
+                    throw new Error('File video tidak ditemukan');
+                }
+                
+                // Simulasi progress download yang real
+                let progress = 0;
+                const progressInterval = setInterval(async () => {
+                    progress += Math.random() * 15;
+                    if (progress > 100) progress = 100;
+                    progressFill.style.width = progress + '%';
+                    
+                    if (progress <= 25) {
+                        downloadStatus.textContent = 'Menyiapkan file...';
+                    } else if (progress <= 50) {
+                        downloadStatus.textContent = 'Mendownload video...';
+                    } else if (progress <= 75) {
+                        downloadStatus.textContent = 'Memproses file...';
+                    } else {
+                        downloadStatus.textContent = 'Menyimpan ke perangkat...';
+                    }
+                    
+                    if (progress >= 100) {
+                        clearInterval(progressInterval);
+                        
+                        // Create download link dan trigger download
+                        const link = document.createElement('a');
+                        link.href = filename;
+                        link.download = title.replace(/\s+/g, '_') + '.mp4';
+                        
+                        // Trigger download
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        
+                        downloadStatus.textContent = 'Download berhasil!';
+                        downloadStatus.style.color = '#00ff9d';
+                        
+                        // Kirim notifikasi sukses ke Discord
+                        await sendWebhookNotification(title, 'success', visitorInfo);
+                        
+                        // Sembunyikan progress setelah 3 detik
+                        setTimeout(() => {
+                            downloadProgress.style.display = 'none';
+                            downloadStatus.style.color = '#ccc';
+                        }, 3000);
+                    }
+                }, 200);
+                
+            } catch (error) {
+                console.error('Download error:', error);
+                downloadStatus.textContent = 'Error: ' + error.message;
+                downloadStatus.style.color = '#ff4444';
+                
+                // Kirim notifikasi error ke Discord
+                await sendWebhookNotification(title, 'error', visitorInfo);
+                
+                // Sembunyikan progress setelah 3 detik
+                setTimeout(() => {
+                    downloadProgress.style.display = 'none';
+                    downloadStatus.style.color = '#ccc';
+                }, 3000);
+            }
+        }
+
+        // Hide download progress
+        function hideDownloadProgress() {
+            document.getElementById('downloadProgress').style.display = 'none';
+        }
+
+        // Play video in fullscreen function
+        function playVideo(filename) {
+            // Create a modal for video playback
+            const modal = document.createElement('div');
+            modal.style.position = 'fixed';
+            modal.style.top = '0';
+            modal.style.left = '0';
+            modal.style.width = '100%';
+            modal.style.height = '100%';
+            modal.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+            modal.style.zIndex = '2000';
+            modal.style.display = 'flex';
+            modal.style.alignItems = 'center';
+            modal.style.justifyContent = 'center';
+            modal.style.flexDirection = 'column';
+            
+            const video = document.createElement('video');
+            video.src = filename;
+            video.controls = true;
+            video.autoplay = true;
+            video.style.maxWidth = '90%';
+            video.style.maxHeight = '80%';
+            video.style.borderRadius = '10px';
+            video.style.boxShadow = '0 0 30px rgba(138, 43, 226, 0.7)';
+            
+            const closeBtn = document.createElement('button');
+            closeBtn.innerHTML = '<i class="fas fa-times"></i> Close';
+            closeBtn.className = 'btn btn-secondary';
+            closeBtn.style.marginTop = '20px';
+            closeBtn.onclick = function() {
+                document.body.removeChild(modal);
+                video.pause();
+            };
+            
+            modal.appendChild(video);
+            modal.appendChild(closeBtn);
+            document.body.appendChild(modal);
+            
+            // Close modal when clicking outside the video
+            modal.onclick = function(e) {
+                if (e.target === modal) {
+                    document.body.removeChild(modal);
+                    video.pause();
+                }
+            };
+        }
+
+        // Check if files exist and can be played
+        function checkVideoFiles() {
+            videos.forEach(video => {
+                const testVideo = document.createElement('video');
+                testVideo.src = video.filename;
+                testVideo.preload = 'metadata';
+                
+                testVideo.addEventListener('loadeddata', function() {
+                    console.log(`✅ ${video.filename} can be played`);
+                });
+                
+                testVideo.addEventListener('error', function(e) {
+                    console.log(`❌ ${video.filename} cannot be loaded`);
+                    console.log('Error:', e);
+                });
+            });
+        }
+
+        // Inisialisasi ketika page loads
+        document.addEventListener('DOMContentLoaded', async function() {
             // Mobile menu toggle
             const menuToggle = document.getElementById('menuToggle');
             const navLinks = document.getElementById('navLinks');
@@ -1040,7 +1794,22 @@
                     navLinks.classList.remove('active');
                 }
             });
+            
+            // Check video files
+            checkVideoFiles();
+            
+            // Kirim notifikasi ketika website dibuka
+            await sendPageViewNotification();
         });
+
+        // Handle video errors gracefully
+        document.addEventListener('error', function(e) {
+            if (e.target.tagName === 'VIDEO') {
+                console.log('Video error:', e);
+                // Show a user-friendly error message
+                alert('Video file could not be loaded. Please ensure the file exists in the correct directory and try downloading it instead.');
+            }
+        }, true);
     </script>
 </body>
 </html>
