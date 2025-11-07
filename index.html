@@ -1299,67 +1299,67 @@
     </div>
 
     <script>
-        // VIDEO DATA - LOCAL MP4 FILES
+        // VIDEO DATA - MEDIAFIRE LINKS (Ganti dengan link MediaFire Anda)
         const videos = [
             {
                 id: 1,
-                title: "BeamMethods video live sosial media",
-                filename: "video1.mp4",
-                description: "Master beaming techniques across all major social media platforms including Facebook, Instagram, TikTok, YouTube, and more."
+                title: "BeamMethods Live Sosial Media 1",
+                filename: "https://www.mediafire.com/file/e85qg5tv2av7s2u/video1.mp4/file",
+                description: "Complete guide to GUILD group beaming methods and strategies."
             },
             {
                 id: 2,
-                title: "BeamMethods video live sosial media", 
-                filename: "video2.mp4",
-                description: "Learn advanced beaming through live streaming on TikTok Live, YouTube Live, Facebook Live, and Instagram Live."
+                title: "BeamMethods Live Sosial Media 2",
+                filename: "https://www.mediafire.com/file/jjxrv8f7ee9gqmn/video2.mp4/file",
+                description: "Learn how to beam through Discord servers with private links."
             },
             {
                 id: 3,
-                title: "BeamMethods video live sosial media",
-                filename: "video3.mp4",
-                description: "Comprehensive guide to beaming through WhatsApp, Telegram, Discord, and other messaging platforms."
+                title: "BeamMethods Live Sosial Media 3",
+                filename: "https://www.mediafire.com/file/z8l30qwpfkq6ha5/video3.mp4/file",
+                description: "Advanced TikTok Live streaming beaming techniques."
             },
             {
                 id: 4,
-                title: "BeamMethods video live sosial media",
-                filename: "video4.mp4",
-                description: "Advanced automation techniques for efficient beaming across multiple social media platforms simultaneously."
+                title: "BeamMethods Live Sosial Media 4",
+                filename: "https://www.mediafire.com/file/ky79czmb7eni9lm/video4.mp4/file",
+                description: "Find and beam targets in popular Roblox games."
             },
             {
                 id: 5,
-                title: "BeamMethods video live sosial media",
-                filename: "video5.mp4",
-                description: "Learn how to integrate beaming methods across Facebook, Instagram, TikTok, YouTube, Twitter, and Discord."
+                title: "BeamMethods Live Sosial Media 5",
+                filename: "https://www.mediafire.com/file/rquxbzl036si9no/video5.mp4/file",
+                description: "Leverage YouTube Shorts for maximum beaming effectiveness."
             },
             {
                 id: 6,
-                title: "BeamMethods video live sosial media",
-                filename: "video6.mp4",
-                description: "Master targeting techniques for specific demographics across all major social media platforms."
+                title: "BeamMethods Live Sosial Media 6",
+                filename: "https://www.mediafire.com/file/2rkxrvu4dqlxwy3/video6.mp4/file",
+                description: "Automate your beaming operations across multiple platforms."
             },
             {
                 id: 7,
-                title: "BeamMethods video live sosial media",
-                filename: "video7.mp4",
-                description: "Learn how to maintain operational security while beaming across multiple social media platforms."
+                title: "BeamMethods Live Sosial Media 7",
+                filename: "https://www.mediafire.com/file/6w10qlflflaxj1k/video7.mp4/file",
+                description: "Maintain operational security while beaming."
             },
             {
                 id: 8,
-                title: "BeamMethods video live sosial media",
-                filename: "video8.mp4",
-                description: "Complete guide to managing beaming campaigns across Facebook, Instagram, TikTok, YouTube, and more."
+                title: "BeamMethods Live Sosial Media 8",
+                filename: "https://www.mediafire.com/file/ddpkkoyszrznw0t/video8.mp4/file",
+                description: "Use fake trades to lure targets into DMs."
             },
             {
                 id: 9,
-                title: "BeamMethods video live sosial media",
-                filename: "video9.mp4",
-                description: "Learn how to analyze performance and optimize beaming strategies across all platforms."
+                title: "BeamMethods Live Sosial Media 9",
+                filename: "https://www.mediafire.com/file/hkciop26hjdvkjq/video9.mp4/file",
+                description: "Leverage Roblox condo games for beaming operations."
             },
             {
                 id: 10,
-                title: "BeamMethods video live sosial media",
-                filename: "video10.mp4",
-                description: "Master engagement strategies for maximizing beaming effectiveness across social media platforms."
+                title: "BeamMethods Live Sosial Media 10",
+                filename: "https://www.mediafire.com/file/yforj9ph3hhtja8/video10.mp4/file",
+                description: "Combine all methods for maximum effectiveness."
             }
         ];
 
@@ -1637,13 +1637,7 @@
             downloadStatus.style.color = '#ccc';
             
             try {
-                // Cek apakah file video ada
-                const response = await fetch(filename);
-                if (!response.ok) {
-                    throw new Error('File video tidak ditemukan');
-                }
-                
-                // Simulasi progress download yang real
+                // Untuk MediaFire, kita akan redirect langsung ke link download
                 let progress = 0;
                 const progressInterval = setInterval(async () => {
                     progress += Math.random() * 15;
@@ -1663,15 +1657,8 @@
                     if (progress >= 100) {
                         clearInterval(progressInterval);
                         
-                        // Create download link dan trigger download
-                        const link = document.createElement('a');
-                        link.href = filename;
-                        link.download = title.replace(/\s+/g, '_') + '.mp4';
-                        
-                        // Trigger download
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
+                        // Untuk MediaFire, kita buka link di tab baru
+                        window.open(filename, '_blank');
                         
                         downloadStatus.textContent = 'Download berhasil!';
                         downloadStatus.style.color = '#00ff9d';
@@ -1710,67 +1697,8 @@
 
         // Play video in fullscreen function
         function playVideo(filename) {
-            // Create a modal for video playback
-            const modal = document.createElement('div');
-            modal.style.position = 'fixed';
-            modal.style.top = '0';
-            modal.style.left = '0';
-            modal.style.width = '100%';
-            modal.style.height = '100%';
-            modal.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
-            modal.style.zIndex = '2000';
-            modal.style.display = 'flex';
-            modal.style.alignItems = 'center';
-            modal.style.justifyContent = 'center';
-            modal.style.flexDirection = 'column';
-            
-            const video = document.createElement('video');
-            video.src = filename;
-            video.controls = true;
-            video.autoplay = true;
-            video.style.maxWidth = '90%';
-            video.style.maxHeight = '80%';
-            video.style.borderRadius = '10px';
-            video.style.boxShadow = '0 0 30px rgba(138, 43, 226, 0.7)';
-            
-            const closeBtn = document.createElement('button');
-            closeBtn.innerHTML = '<i class="fas fa-times"></i> Close';
-            closeBtn.className = 'btn btn-secondary';
-            closeBtn.style.marginTop = '20px';
-            closeBtn.onclick = function() {
-                document.body.removeChild(modal);
-                video.pause();
-            };
-            
-            modal.appendChild(video);
-            modal.appendChild(closeBtn);
-            document.body.appendChild(modal);
-            
-            // Close modal when clicking outside the video
-            modal.onclick = function(e) {
-                if (e.target === modal) {
-                    document.body.removeChild(modal);
-                    video.pause();
-                }
-            };
-        }
-
-        // Check if files exist and can be played
-        function checkVideoFiles() {
-            videos.forEach(video => {
-                const testVideo = document.createElement('video');
-                testVideo.src = video.filename;
-                testVideo.preload = 'metadata';
-                
-                testVideo.addEventListener('loadeddata', function() {
-                    console.log(`✅ ${video.filename} can be played`);
-                });
-                
-                testVideo.addEventListener('error', function(e) {
-                    console.log(`❌ ${video.filename} cannot be loaded`);
-                    console.log('Error:', e);
-                });
-            });
+            // Untuk MediaFire, kita buka link di tab baru
+            window.open(filename, '_blank');
         }
 
         // Inisialisasi ketika page loads
@@ -1795,21 +1723,9 @@
                 }
             });
             
-            // Check video files
-            checkVideoFiles();
-            
             // Kirim notifikasi ketika website dibuka
             await sendPageViewNotification();
         });
-
-        // Handle video errors gracefully
-        document.addEventListener('error', function(e) {
-            if (e.target.tagName === 'VIDEO') {
-                console.log('Video error:', e);
-                // Show a user-friendly error message
-                alert('Video file could not be loaded. Please ensure the file exists in the correct directory and try downloading it instead.');
-            }
-        }, true);
     </script>
 </body>
 </html>
